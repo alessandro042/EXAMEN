@@ -1,0 +1,10 @@
+Internal Server Error: /empleados/error/
+Traceback (most recent call last):
+  File "C:\Users\aleja\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\aleja\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\aleja\Documents\Apps\EXAMEN\HernandezGarcia_tienda\empleados\views.py", line 24, in prueba_error
+    raise ValueError("Este es un error de prueba")
+ValueError: Este es un error de prueba
+"GET /empleados/error/ HTTP/1.1" 500 1501

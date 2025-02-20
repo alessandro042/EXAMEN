@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'HernandezGarcia_tienda.middlewares.middleware.GlobalExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'HernandezGarcia_tienda.urls'
@@ -86,6 +87,25 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
     }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "errores.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    },
 }
 
 
