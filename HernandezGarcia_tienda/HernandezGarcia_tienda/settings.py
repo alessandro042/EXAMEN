@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,3 +154,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 HANDLER404 = 'productos.views.error_404_view'
 HANDLER500 = 'productos.views.error_500_view'
+
+ENVIRONMENT = os.getenv('DJANGO_ENV', 'development')   
+
+if ENVIRONMENT == 'development':
+    DEBUG = True  # Cambia a True para desarrollo
+    LOG_LEVEL = "DEBUG"
+elif ENVIRONMENT == 'testing':
+    DEBUG = False
+    LOG_LEVEL = "WARNING"
+elif ENVIRONMENT == 'production':
+    DEBUG = False
+    LOG_LEVEL = "ERROR"

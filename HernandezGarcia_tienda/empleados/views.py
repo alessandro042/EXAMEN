@@ -4,6 +4,7 @@ from .models import Empleado
 from .forms import EmpleadoForm 
 from django.http import JsonResponse
 import math
+from django.conf import settings
 
 
 def lista_empleados(request): 
@@ -171,5 +172,10 @@ def error_handler(request, error_code, error_message):
     
     return render(request, "exception_form.html", context)
 
-
-
+def perfil_actual(request):
+    perfil = {
+        'perfil': settings.ENVIRONMENT,  # Obtén el entorno actual
+        'debug': settings.DEBUG,         # Obtén el valor de DEBUG
+        'nivel_log': settings.LOG_LEVEL  # Obtén el nivel de log
+    }
+    return render(request, 'perfil.html', {'perfil': perfil})

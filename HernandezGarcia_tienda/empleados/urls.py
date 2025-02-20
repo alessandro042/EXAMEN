@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import lista_empleados, registrar_empleados, prueba_error, exception_form, error_handler
+from .views import lista_empleados, registrar_empleados, prueba_error, exception_form, error_handler, perfil_actual
 
 urlpatterns = [
     path('', lista_empleados, name='lista_empleados'),
@@ -7,5 +7,7 @@ urlpatterns = [
     path("error/", prueba_error, name="error"),
     path("formulario-excepciones/", exception_form, name="exception_form"),
     path("error/<str:error_code>/<str:error_message>/", error_handler, name="error_handler"),
+    path("perfil/", perfil_actual, name="perfil_actual"),
+    
 
 ]
