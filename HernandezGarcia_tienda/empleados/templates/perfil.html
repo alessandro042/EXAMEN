@@ -5,16 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Ejecución</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-header h1 {
+            font-size: 24px;
+            color: #343a40;
+        }
+        .profile-content p {
+            font-size: 18px;
+            color: #495057;
+        }
+        .profile-content p strong {
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Perfil de Ejecución</h1>
-        <div class="card mt-4">
-            <div class="card-body">
-                <p><strong>Perfil Actual:</strong> {{ perfil.perfil }}</p>
-                <p><strong>Modo Debug:</strong> {% if perfil.debug %} Activado ✅ {% else %} Desactivado ❌ {% endif %}</p>
-                <p><strong>Nivel de Log:</strong> {{ perfil.nivel_log }}</p>
-            </div>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Perfil de Ejecución</h1>
+        </div>
+        <div class="profile-content">
+            <p><strong>Perfil Actual:</strong> {{ perfil.perfil }}</p>
+            <p><strong>Modo Debug:</strong> {% if perfil.debug %} Activado  {% else %} Desactivado  {% endif %}</p>
+            <p><strong>Nivel de Log:</strong> {{ perfil.nivel_log }}</p>
         </div>
     </div>
 </body>

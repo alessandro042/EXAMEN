@@ -4,33 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Manejo de Excepciones</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Formulario de Prueba - Global Exceptions</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="num1">Número 1:</label>
-        <input type="text" name="num1" required>
-        <label for="num2">Número 2:</label>
-        <input type="text" name="num2">
-        <label for="operation">Operación:</label>
-        <select name="operation">
-            <option value="dividir">Dividir</option>
-            <option value="multiplicar">Multiplicar</option>
-            <option value="sumar">Sumar</option>
-            <option value="restar">Restar</option>
-            <option value="raiz">Raíz Cuadrada</option>
-            <option value="raiz">Integrar</option>
-        </select>
-        <button type="submit">Calcular</button>
-    </form>
-    
-    {% if result is not None %}
-        <p>Resultado: {{ result }}</p>
-    {% endif %}
-    
-    {% if error %}
-        <p style="color: red;">Error: {{ error }}</p>
-    {% endif %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario de Prueba - Global Exceptions</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="num1">Número 1:</label>
+                <input type="text" class="form-control" name="num1" required>
+            </div>
+            <div class="form-group">
+                <label for="num2">Número 2:</label>
+                <input type="text" class="form-control" name="num2">
+            </div>
+            <div class="form-group">
+                <label for="operation">Operación:</label>
+                <select class="form-control" name="operation">
+                    <option value="dividir">Dividir</option>
+                    <option value="multiplicar">Multiplicar</option>
+                    <option value="sumar">Sumar</option>
+                    <option value="restar">Restar</option>
+                    <option value="raiz">Raíz Cuadrada</option>
+                    <option value="integrar">Integrar</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+        
+        {% if result is not None %}
+            <div class="alert alert-success mt-4">
+                Resultado: {{ result }}
+            </div>
+        {% endif %}
+        
+        {% if error %}
+            <div class="alert alert-danger mt-4">
+                Error: {{ error }}
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

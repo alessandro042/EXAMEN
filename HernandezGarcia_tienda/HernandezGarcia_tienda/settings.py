@@ -90,24 +90,9 @@ DATABASES = {
     }
 }
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": "errores.log",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "ERROR",
-            "propagate": True,
-        },
-    },
-}
+AUTH_USER_MODEL = 'empleados.User'
+
+
 
 
 # Password validation
@@ -158,7 +143,7 @@ HANDLER500 = 'productos.views.error_500_view'
 ENVIRONMENT = os.getenv('DJANGO_ENV', 'development')   
 
 if ENVIRONMENT == 'development':
-    DEBUG = True  # Cambia a True para desarrollo
+    DEBUG = False  # Cambia a True para desarrollo
     LOG_LEVEL = "DEBUG"
 elif ENVIRONMENT == 'testing':
     DEBUG = False

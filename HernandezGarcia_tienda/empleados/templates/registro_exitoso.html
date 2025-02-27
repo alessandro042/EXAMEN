@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ error_title }}</title>
+    <title>Registro Exitoso</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header bg-danger text-white">
-                <h2>{{ error_title }}</h2>
-            </div>
             <div class="card-body">
-                <p><strong>Excepción:</strong> {{ error_code }}</p>
-                <p><strong>Detalles:</strong> {{ error_message }}</p>
-                <p>{{ error_description }}</p>
-                <a href="/empleados/formulario-excepciones/" class="btn btn-primary">Volver al formulario</a>
+                <h2 class="card-title">Registro Exitoso</h2>
+                <p class="card-text">Nombre: {{ nombre }}</p>
+                <p class="card-text">Correo: {{ email }}</p>
+                <p class="card-text">UUID generado: {{ uuid }}</p>
+                <a href="{% url 'registro' %}" class="btn btn-primary">Registrar otro usuario</a>
             </div>
         </div>
     </div>

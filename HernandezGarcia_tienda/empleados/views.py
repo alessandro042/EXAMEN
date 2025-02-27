@@ -5,6 +5,20 @@ from .forms import EmpleadoForm
 from django.http import JsonResponse
 import math
 from django.conf import settings
+from django.shortcuts import render
+import uuid
+from .forms import UserRegistrationForm
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login as auth_login 
+from django.contrib.auth import login
+from django.contrib.auth import logout
+from django.contrib import messages
+from .forms import LoginForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+
 
 
 def lista_empleados(request): 
@@ -172,6 +186,10 @@ def error_handler(request, error_code, error_message):
     
     return render(request, "exception_form.html", context)
 
+def es_admin(user):
+    return user.is_authenticated and user.role == 'admin'
+
+@user_passes_test(es_admin, login_url='/')
 def perfil_actual(request):
     perfil = {
         'perfil': settings.ENVIRONMENT,  # Obtén el entorno actual
@@ -179,3 +197,51 @@ def perfil_actual(request):
         'nivel_log': settings.LOG_LEVEL  # Obtén el nivel de log
     }
     return render(request, 'perfil.html', {'perfil': perfil})
+
+
+def registro_view(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.password = make_password(form.cleaned_data['password'])  # Hash de contraseña
+            user.role = form.cleaned_data['role']
+            user.save()
+            login(request, user)  # Inicia sesión automáticamente después del registro
+            return redirect('registro')  # Cambia 'home' por tu vista principal
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registro.html', {'form': form})
+
+    
+def procesar_registro(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        email = request.POST.get("email")
+        user_uuid = request.POST.get("uuid")
+
+        return render(request, "registro_exitoso.html", {
+            "nombre": nombre,
+            "email": email,
+            "uuid": user_uuid
+        })
+
+def login_view(request):
+    if request.method == "POST":
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f"Bienvenido {user.username}!")
+            return redirect("registro")  # Cambia 'home' por tu vista de inicio
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    else:
+        form = LoginForm()
+    
+    return render(request, "login.html", {"form": form})
+
+def logout_view(request):       
+    logout(request)
+    messages.success(request, "Has cerrado sesión correctamente.")
+    return redirect("login")  # Redirige a la página de login después del logout
